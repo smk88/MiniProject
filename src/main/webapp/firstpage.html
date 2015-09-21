@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mini Project Portal</title>
+        <style type="text/css">
+            h1{
+                text-align: center;
+                padding-top: 50px;
+            }
+        </style>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/skel.min.js"></script>
+        <script src="js/skel-layers.min.js"></script>
+        <script src="js/init.js"></script>
+        <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+        </noscript>
+    </head>
+    <body class="landing">
+        
+        <script
+        src="https://code.angularjs.org/1.4.3/angular.js"></script>
+
+        <!-- Header -->
+        <header id="header">
+            <h1 style="text-align: center"><a href="index.html"><font color="white">Mini Project Portal</font></a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Banner -->
+        <section id="banner">
+            <h2>Welcome!</h2>
+            <ul class="actions alt">
+                <li><input type="text" name="lname" id="lname" value="" disabled style="width:500px;font-size: 30px;text-align: center;"></li>
+            </ul>
+        </section>
+
+
+        <section id="one" class="wrapper style1 align-center">
+            <div class="container">
+                <header>
+                </header>
+                <div class="row 200%" ng-app="redirect" ng-controller="mycon">
+                    <section class="4u 12u$(small)">
+                        <i class="icon big rounded fa-pencil"></i>
+                        <p><input type="button" value = "Register" ng-click="reg()"></p>
+                    </section>
+                    <section class="4u 12u$(small)">
+                        <i class="icon big rounded fa-user"></i>
+                        <p ng-click="view()"><font color="white">View</font></p>
+                    </section>
+                    <section class="4u$ 12u$(small)">
+                        <i class="icon big rounded fa-info"></i>
+                        <p ng-click="about()"><font color="white">About</font></p>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; All rights reserved.</li>
+            </ul>
+        </footer>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+        <script>
+            function getURLParameter(name) {
+                return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+            }
+            var myvar = getURLParameter('record');
+            var user = myvar.split("-", 11);
+            document.getElementById('lname').value = user[3] + " " + user[4] + " " + user[5];
+            var div=user[0];
+            var year=user[8];
+        </script>
+        <script>
+            var myapp = angular.module('redirect', []);
+            myapp.controller('mycon', function ($scope, $http) {
+                $scope.reg = function () {
+                   window.location='/MiniProjectReg/Register.html?reg='+div+"-"+year;
+                };
+            });
+        </script>
+    </body>
+</html>

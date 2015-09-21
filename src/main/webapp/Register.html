@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mini Project Portal</title>
+        <style type="text/css">
+            h1{
+                text-align: center;
+                padding-top: 50px;
+            }
+        </style>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/skel.min.js"></script>
+        <script src="js/skel-layers.min.js"></script>
+        <script src="js/init.js"></script>
+        <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+        </noscript>
+    </head>
+    <body style="background-image:url(images/pic.jpg);background-size:  cover;">
+        <div style="background-image:url('images/pic.jpg');background-repeat:no-repeat;">
+        </div>
+
+        <h1><font color="white">Registration Page</font></h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <ul class="actions alt">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li><input style="background-image:url('images/pic.jpg');color: white;font-size: 30px;text-align: center;" type="label" name="yr" value="Year" disabled></li>
+            <li><input ng-model="year" style="color:white;" type="text" name="lname" id="year" value=""  disabled ></li>
+            <li><input style="background-image:url('images/pic.jpg');color: white;font-size: 30px;text-align: center;" type="label" name="div" value="Division" disabled></li>
+            <li><input ng-model="divison" style="color:white;" type="text" name="lname" id="div"  value="" disabled></li>
+        </ul>
+
+        <div >
+            <table class="alt" border=5px ng-app="myApp" ng-controller="studentctrl" >
+                <thead>
+                    <tr text-align:center>
+                        <th>G.R. No.</th>
+                        <th>Roll No.</th>
+                        <th>Members</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody >
+
+                    <tr>
+                        <td><input type="text" id="grno1" value="" disabled></td>
+                        <td><input type="text" id="roll1" value="" disabled></td>
+                        <td >
+                            <span  class="nullable">
+                                <select value="CHOOSE MEMBER" style="background-color: #228B22;" id="drop1"  ng-model="selectstudent1" ng-options="student.name for student in students">
+                                   
+                                </select>
+                            </span>
+
+                        </td>
+                        <td><a type="reset" 
+                               ng-click="reset()" class="button">Remove</a>
+                            <a type="text" 
+                               ng-click="add1()" class="button">Add</a></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="grno2" value="" disabled></td>
+                        <td><input type="text" id="roll2" value="" disabled></td>
+                        <td> <span  class="nullable">
+                                <select id="drop2" style="background-color: #228B22;" ng-model="selectstudent2" ng-options="student.name for student in students">
+                                    <option id="stu2" value="">-- choose member--</option>
+                                </select>
+                            </span></td>
+                        <td><a class="button" type="reset" 
+                               ng-click="reset()">Remove</a>
+                            <a type="text" 
+                               ng-click="add2()" class="button">Add</a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="grno3" value="" disabled></td>
+                        <td><input type="text" id="roll3" value="" disabled></td>
+                        <td> <span  class="nullable">
+                                <select id="drop3"  style="background-color: #228B22;" ng-model="selectstudent3" ng-options="student.name for student in students">
+                                    <option value="">-- choose member--</option>
+                                </select>
+                            </span></td>
+                        <td><a type="reset" 
+                               ng-click="reset()" class="button">Remove</a>
+                        <a type="text" 
+                               ng-click="add3()" class="button">Add</a></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="grno4" value="" disabled></td>
+                        <td><input type="text" id="roll4" value="" disabled></td>
+                        <td> <span  class="nullable">
+                                <select id="drop4" style="background-color: #228B22;" ng-model="selectstudent4" ng-options="student.name for student in students">
+                                    <option value="">-- choose member--</option>
+                                </select>
+                            </span></td>
+                        <td><a type="reset" 
+                               ng-click="reset()" class="button">Remove</a>
+                        <a type="text" 
+                               ng-click="add4()" class="button">Add</a></td>
+                    </tr>
+                    <tr>
+
+                        <td><input type="text" id="grno5" value="" disabled></td>
+                        <td><input type="text" id="roll5" value="" disabled></td>
+                        <td> <span  class="nullable">
+                                <select id="drop5" style="background-color: #228B22;" ng-model="selectstudent5" ng-options="student.name for student in students">
+                                    <option value="">-- choose member--</option>
+                                </select>
+                            </span></td>
+                        <td><a type="reset" 
+                               ng-click="reset()" class="button">Remove</a>
+                        <a type="text" 
+                               ng-click="add5()" class="button">Add</a></td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+        <script>
+                                   function getURLParameter(name) {
+                                       return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+                                   }
+                                   var user = getURLParameter('reg');
+                                   var user1 = user.split("-", 2);
+                                   document.getElementById('div').value = user1[0];
+                                   document.getElementById('year').value = user1[1];
+        </script>
+        <script>
+            var app = angular.module("myApp", []);
+            app.controller("studentctrl", function ($scope, $http) {
+                var url1 = 'webresources/mydata/' + user1[0] + '/' + user1[1];
+                alert(url1);
+                $http.get(url1).
+                        success(function (data, status, headers, config) {
+                            alert(data);
+                            console.log(JSON.stringify(data));
+                            $scope.students = data;
+
+                        }).
+                        error(function (data, status, headers, config) {
+                            alert("resource not found");
+                        });
+                $scope.add1 = function () {
+                    var x = document.getElementById("drop1").selectedIndex;
+                    var y = document.getElementById("drop1").options;
+                    var z = y[x].index;
+                    //z=z-1;
+                    var i = $scope.students[z];
+                    var j = i.grno;
+                    var k=i.roll;
+                    document.getElementById('grno1').value=j;
+                    document.getElementById('roll1').value=k;
+                }
+                $scope.add2= function () {
+                    var x = document.getElementById("drop2").selectedIndex;
+                    var y = document.getElementById("drop2").options;
+                    var z = y[x].index;
+                    z=z-1;
+                    var i = $scope.students[z];
+                    var j = i.grno;
+                    var k=i.roll;
+                    document.getElementById('grno2').value=j;
+                    document.getElementById('roll2').value=k;
+                }
+                $scope.add3 = function () {
+                    var x = document.getElementById("drop3").selectedIndex;
+                    var y = document.getElementById("drop3").options;
+                    var z = y[x].index;
+                    z=z-1;
+                    var i = $scope.students[z];
+                    var j = i.grno;
+                    var k=i.roll;
+                    document.getElementById('grno3').value=j;
+                    document.getElementById('roll3').value=k;
+                }
+                $scope.add4 = function () {
+                    var x = document.getElementById("drop4").selectedIndex;
+                    var y = document.getElementById("drop4").options;
+                    var z = y[x].index;
+                    z=z-1;
+                    var i = $scope.students[z];
+                    var j = i.grno;
+                    var k=i.roll;
+                    document.getElementById('grno4').value=j;
+                    document.getElementById('roll4').value=k;
+                }
+                $scope.add5 = function () {
+                    var x = document.getElementById("drop5").selectedIndex;
+                    var y = document.getElementById("drop5").options;
+                    var z = y[x].index;
+                    z=z-1;
+                    var i = $scope.students[z];
+                    var j = i.grno;
+                    var k=i.roll;
+                    document.getElementById('grno5').value=j;
+                    document.getElementById('roll5').value=k;
+                }
+                $scope.reset=function()
+                {
+                    
+                }
+            });
+        </script>
+    </body>
+</html>
