@@ -41,7 +41,7 @@ public class MyResource {
             con = DriverManager.getConnection(url, "abc", "Project123");
             str = "Database connection established";
             System.out.println(str);
-
+            int i=0;
             stm = con.createStatement();
             System.out.println(input1 + "\t" + input2);
             String sql = "SELECT * FROM login where username ='" + input1 + "' and Password ='" + input2 + "'";     // where Username = '"+str1+"' and Password = '"+str2+"' "; 
@@ -58,7 +58,7 @@ public class MyResource {
                     if(RS1.next())
                     {
                         System.out.println(RS1.getString("DivisionName") + RS1.getString("RollNo") + RS1.getString("GRNo") + RS1.getString("FirstName") + RS1.getString("MiddleName") + RS1.getString("SurName") + RS1.getString("Course") + RS1.getString("Branch") + RS1.getString("Class") + RS1.getString("ModuleName") + RS1.getString("Gender"));
-                        login= RS1.getString("DivisionName") +'-'+ RS1.getString("RollNo")+'-'+ RS1.getString("GRNo") +'-'+ RS1.getString("FirstName") + '-'+RS1.getString("MiddleName") + '-'+RS1.getString("SurName") +'-'+ RS1.getString("Course") +'-'+ RS1.getString("Branch") +'-'+ RS1.getString("Class") +'-'+ RS1.getString("ModuleName") +'-'+ RS1.getString("Gender");
+                        login= RS1.getString("DivisionName") +'_'+ RS1.getString("RollNo")+'_'+ RS1.getString("GRNo") +'_'+ RS1.getString("FirstName") + '_'+RS1.getString("MiddleName") + '_'+RS1.getString("SurName") +'_'+ RS1.getString("Course") +'_'+ RS1.getString("Branch") +'_'+ RS1.getString("Class") +'_'+ RS1.getString("ModuleName") +'_'+ RS1.getString("Gender");
                     }
                     return login;
                 } else {

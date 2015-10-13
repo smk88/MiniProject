@@ -22,10 +22,12 @@
         <link rel="stylesheet" href="css/style-xlarge.css" />
         </noscript>
     </head>
-    <body class="landing">
+    <body class="landing" onload="f()">
         
         <script
-        src="https://code.angularjs.org/1.4.3/angular.js"></script>
+            src="https://code.angularjs.org/1.4.3/angular.js">
+                
+        </script>
 
         <!-- Header -->
         <header id="header">
@@ -75,20 +77,29 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
         <script>
+            
+            function f() {
+            alert('hello');    
+            }
+            
             function getURLParameter(name) {
                 return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
             }
             var myvar = getURLParameter('record');
-            var user = myvar.split("-", 11);
+            var user = myvar.split("_", 12);
             document.getElementById('lname').value = user[3] + " " + user[4] + " " + user[5];
             var div=user[0];
             var year=user[8];
+            var mod=user[9];
         </script>
         <script>
             var myapp = angular.module('redirect', []);
             myapp.controller('mycon', function ($scope, $http) {
-                $scope.reg = function () {
-                   window.location='/MiniProjectReg/Register.html?reg='+div+"-"+year;
+                
+             
+               
+                    $scope.reg = function () {
+                   window.location='/MiniProjectReg/Register.html?reg='+div+"/"+year+"/"+mod;
                 };
             });
         </script>

@@ -10,9 +10,6 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-// Saurabh Khatri
-
-
 @Path("/mydata")
 
 public class MyResource1 {
@@ -31,7 +28,6 @@ public class MyResource1 {
         System.out.println(username + "\t" + password);
         return getJSON(username, password);
     }
-
 
     public static String getJSON(String in1, String in2) throws JSONException {
         JSONArray array = new JSONArray();
@@ -57,7 +53,7 @@ public class MyResource1 {
                 j.put("roll", Rollno);
                 j.put("grno", GrNo);
                 array.put(j);
-             }
+            }
             System.out.println(array);
             return array.toString();
         } catch (Exception err) {
@@ -66,4 +62,5 @@ public class MyResource1 {
         return null;
 
     }
+    
 }

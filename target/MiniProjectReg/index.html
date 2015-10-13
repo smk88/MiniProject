@@ -184,13 +184,13 @@
             myapp.controller('mycontroller', function ($scope, $http) {
                 $scope.login = function () {
                     var url = 'webresources/myresource/' + $scope.user + '/' + $scope.pass;
-                    alert(url);
+                    //alert(url);
                     $http.get(url).success(function (response){
-                        alert(response);
+                        //alert(response);
                         if  (response === "false")
                         {
                              alert("Wrong Credentials"); 
-                        }
+                         }
                         else 
                         {
                             alert("Success");
@@ -199,7 +199,7 @@
                             
                         }
                     }).error(function (response) {
-                        alert("Resourse not found");
+                        alert("Resource not found");
                     });
                 };
             });

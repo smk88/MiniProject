@@ -41,10 +41,10 @@
             <li><input ng-model="divison" style="color:white;" type="text" name="lname" id="div"  value="" disabled></li>
         </ul>
 
-        <div >
-            <table class="alt" border=5px ng-app="myApp" ng-controller="studentctrl" >
+        <div ng-app="myApp" ng-controller="studentctrl">
+            <table class="alt" border=5px  >
                 <thead>
-                    <tr text-align:center>
+                    <tr style="text-align:center;">
                         <th>G.R. No.</th>
                         <th>Roll No.</th>
                         <th>Members</th>
@@ -58,8 +58,8 @@
                         <td><input type="text" id="roll1" value="" disabled></td>
                         <td >
                             <span  class="nullable">
-                                <select value="CHOOSE MEMBER" style="background-color: #228B22;" id="drop1"  ng-model="selectstudent1" ng-options="student.name for student in students">
-                                   
+                                <select  style="background-color: #228B22;" id="drop1" ng-model="selectstudent1" ng-options="student.name for student in students" >
+
                                 </select>
                             </span>
 
@@ -94,7 +94,7 @@
                             </span></td>
                         <td><a type="reset" 
                                ng-click="reset()" class="button">Remove</a>
-                        <a type="text" 
+                            <a type="text" 
                                ng-click="add3()" class="button">Add</a></td>
                     </tr>
                     <tr>
@@ -107,7 +107,7 @@
                             </span></td>
                         <td><a type="reset" 
                                ng-click="reset()" class="button">Remove</a>
-                        <a type="text" 
+                            <a type="text" 
                                ng-click="add4()" class="button">Add</a></td>
                     </tr>
                     <tr>
@@ -121,33 +121,54 @@
                             </span></td>
                         <td><a type="reset" 
                                ng-click="reset()" class="button">Remove</a>
-                        <a type="text" 
+                            <a type="text" 
                                ng-click="add5()" class="button">Add</a></td>
 
                     </tr>
 
                 </tbody>
             </table>
+            <div class="domain" style="padding-left: 50px;">
+                <p style=" font-size: 50px; padding-top: 50px;color:white;">SELECT DOMAIN</p>
+                <p style="color: white;font-size: 20px; display: inline;">Preference 1
+                    <select id="domain1" style="background-color: #228B22; color: white" ng-model="domain1" ng-options="domain.sub for domain in domains">
+                        <option value="">--choose domain--</option>
+                    </select></p>
 
+                <p style="color: white;font-size: 20px;">Preference 2
+                    <select id="domain2" style="background-color: #228B22; color: white" ng-model="domain2" ng-options="domain.sub for domain in domains">
+                        <option value="">--choose domain--</option>
+                    </select></p>
+                <p style="color: white;font-size: 20px;">Preference 3
+                    <select id="domain3" style="background-color: #228B22; color: white" ng-model="domain3" ng-options="domain.sub for domain in domains">
+                        <option value="">--choose domain--</option>
+                    </select></p>
+            </div> 
+            <div class="submit" style="padding-left:50%">
+                <a type="text" align="center"
+                   ng-click="submit()" class="button">SUBMIT</a>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
         <script>
-                                   function getURLParameter(name) {
-                                       return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
-                                   }
-                                   var user = getURLParameter('reg');
-                                   var user1 = user.split("-", 2);
-                                   document.getElementById('div').value = user1[0];
-                                   document.getElementById('year').value = user1[1];
+                       function getURLParameter(name) {
+                           return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+                       }
+                       var sortColumnName = "name";
+                       var user = getURLParameter('reg');
+                       var user1 = user.split("/", 3);
+                       document.getElementById('div').value = user1[0];
+                       document.getElementById('year').value = user1[1];
         </script>
         <script>
             var app = angular.module("myApp", []);
             app.controller("studentctrl", function ($scope, $http) {
+                $scope.orderByAttribute = '';
                 var url1 = 'webresources/mydata/' + user1[0] + '/' + user1[1];
                 alert(url1);
                 $http.get(url1).
                         success(function (data, status, headers, config) {
-                            alert(data);
+                            //alert(data);
                             console.log(JSON.stringify(data));
                             $scope.students = data;
 
@@ -155,64 +176,132 @@
                         error(function (data, status, headers, config) {
                             alert("resource not found");
                         });
+
+                var url2 = 'webresources/mydata1/' + user1[2];
+                alert(url2);
+                $http.get(url2).
+                        success(function (data, status, headers, config) {
+                            alert(data);
+                            console.log(JSON.stringify(data));
+                            $scope.domains = data;
+
+                        }).
+                        error(function (data, status, headers, config) {
+                            alert("resource not found");
+                        });
+
                 $scope.add1 = function () {
                     var x = document.getElementById("drop1").selectedIndex;
                     var y = document.getElementById("drop1").options;
                     var z = y[x].index;
-                    //z=z-1;
                     var i = $scope.students[z];
                     var j = i.grno;
-                    var k=i.roll;
-                    document.getElementById('grno1').value=j;
-                    document.getElementById('roll1').value=k;
+                    var k = i.roll;
+                    document.getElementById('grno1').value = j;
+                    document.getElementById('roll1').value = k;
                 }
-                $scope.add2= function () {
+                $scope.add2 = function () {
                     var x = document.getElementById("drop2").selectedIndex;
                     var y = document.getElementById("drop2").options;
                     var z = y[x].index;
-                    z=z-1;
+                    z = z - 1;
                     var i = $scope.students[z];
                     var j = i.grno;
-                    var k=i.roll;
-                    document.getElementById('grno2').value=j;
-                    document.getElementById('roll2').value=k;
+                    var k = i.roll;
+                    document.getElementById('grno2').value = j;
+                    document.getElementById('roll2').value = k;
                 }
                 $scope.add3 = function () {
                     var x = document.getElementById("drop3").selectedIndex;
                     var y = document.getElementById("drop3").options;
                     var z = y[x].index;
-                    z=z-1;
+                    z = z - 1;
                     var i = $scope.students[z];
                     var j = i.grno;
-                    var k=i.roll;
-                    document.getElementById('grno3').value=j;
-                    document.getElementById('roll3').value=k;
+                    var k = i.roll;
+                    document.getElementById('grno3').value = j;
+                    document.getElementById('roll3').value = k;
                 }
                 $scope.add4 = function () {
                     var x = document.getElementById("drop4").selectedIndex;
                     var y = document.getElementById("drop4").options;
                     var z = y[x].index;
-                    z=z-1;
+                    z = z - 1;
                     var i = $scope.students[z];
                     var j = i.grno;
-                    var k=i.roll;
-                    document.getElementById('grno4').value=j;
-                    document.getElementById('roll4').value=k;
+                    var k = i.roll;
+                    document.getElementById('grno4').value = j;
+                    document.getElementById('roll4').value = k;
                 }
                 $scope.add5 = function () {
                     var x = document.getElementById("drop5").selectedIndex;
                     var y = document.getElementById("drop5").options;
                     var z = y[x].index;
-                    z=z-1;
+                    z = z - 1;
                     var i = $scope.students[z];
                     var j = i.grno;
-                    var k=i.roll;
-                    document.getElementById('grno5').value=j;
-                    document.getElementById('roll5').value=k;
+                    var k = i.roll;
+                    document.getElementById('grno5').value = j;
+                    document.getElementById('roll5').value = k;
                 }
-                $scope.reset=function()
+                $scope.reset = function ()
                 {
-                    
+
+                }
+                $scope.submit = function ()
+                {
+                   // alert("in submit");
+                    var grno1 = document.getElementById('grno1').value;
+                    var grno2 = document.getElementById('grno2').value;
+                    var grno3 = document.getElementById('grno3').value;
+                    var grno4 = document.getElementById('grno4').value;
+                    var grno5 = document.getElementById('grno5').value;
+                    var roll1 = document.getElementById('roll1').value;
+                    var roll2 = document.getElementById('roll2').value;
+                    var roll3 = document.getElementById('roll3').value;
+                    var roll4 = document.getElementById('roll4').value;
+                    var roll5 = document.getElementById('roll5').value;
+                    var drop1 = document.getElementById('drop1').value;
+                    var stu1 = $scope.students[drop1];
+                    var name1 = stu1.name;
+                    var drop2 = document.getElementById('drop2').value;
+                    var stu2 = $scope.students[drop2];
+                    var name2 = stu2.name;
+                    var drop3 = document.getElementById('drop3').value;
+                    var stu3 = $scope.students[drop3];
+                    var name3 = stu3.name;
+                    var drop4 = document.getElementById('drop4').value;
+                    var stu4 = $scope.students[drop4];
+                    var name4 = stu4.name;
+                    var drop5 = document.getElementById('drop5').value;
+                    var stu5 = $scope.students[drop5];
+                    var name5 = stu5.name;
+                    var dom1 = document.getElementById('domain1').value;
+                    var sub1 = $scope.domains[dom1];
+                    var domain1 = sub1.sub;
+                    var dom2 = document.getElementById('domain2').value;
+                    var sub2 = $scope.domains[dom2];
+                    var domain2 = sub2.sub;
+                    var dom3 = document.getElementById('domain3').value;
+                    var sub3 = $scope.domains[dom3];
+                    var domain3 = sub3.sub;
+                    var div = document.getElementById('div').value;
+                    var year = document.getElementById('year').value;
+                    var group = {"div": div, "year": year, "grno1": grno1, "grno2": grno2, "grno3": grno3, "grno4": grno4, "grno5": grno5, "roll1": roll1, "roll2": roll2, "roll3": roll3, "roll4": roll4, "roll5": roll5, "name1": name1, "name2": name2, "name3": name3, "name4": name4, "name5": name5, "domain1": domain1, "domain2": domain2, "domain3": domain3};
+                    alert(group);
+                    var request = $.ajax({
+                        url: "webresources/register",
+                        type: "post",
+                        data: JSON.stringify(group)
+                    });
+
+                    request.done(function (response, textStatus, jqXHR) {
+                        console.log("Response from server: " + response);
+                        alert(response);
+                    });
+                    request.error(function (data, status, headers, config) {
+                            alert("resource not found");
+                        });
                 }
             });
         </script>
